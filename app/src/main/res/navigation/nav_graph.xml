@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/personal_data_form_fragment"
+    tools:ignore="UnusedNavigation">
+    <fragment
+        android:id="@+id/personal_data_form_fragment"
+        android:name="com.winechitpaing.sampleviewpod.personalData.PersonalDataFormFillFragment"
+        android:label="@string/personal_data"
+        tools:layout="@layout/fragment_personal_data_form_fill">
+        <action
+            android:id="@+id/action_personal_data_form_fragment_to_personal_data_detail_fragment"
+            app:destination="@+id/personal_data_detail_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/personal_data_detail_fragment"
+        android:name="com.winechitpaing.sampleviewpod.personalData.PersonalDataDetailFragment"
+        android:label="@string/personal_data_detail"
+        tools:layout="@layout/fragment_personal_data_detail">
+        <action
+            android:id="@+id/action_personal_data_detail_fragment_to_personal_data_form_fragment"
+            app:destination="@+id/personal_data_form_fragment" />
+    </fragment>
+</navigation>
