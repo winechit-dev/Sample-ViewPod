@@ -5,26 +5,41 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.winechitpaing.sampleviewpod.R
+import com.winechitpaing.sampleviewpod.databinding.FragmentPersonalDataFormFillBinding
 import com.winechitpaing.sampleviewpod.viewpods.PersonalDataFormFillViewPod
-import kotlinx.android.synthetic.main.fragment_personal_data_form_fill.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class PersonalDataFormFillFragment : Fragment() {
 
     private val viewModel by sharedViewModel<PersonalDataViewModel>()
+    private lateinit var binding: FragmentPersonalDataFormFillBinding
 
-    private val viewPodPersonalDataFormOne by lazy { PersonalDataFormFillViewPod.newInstance(vpPersonalDataFormOne) }
+    private val viewPodPersonalDataFormOne by lazy {
+        PersonalDataFormFillViewPod.newInstance(
+            binding.vpPersonalDataFormThree.root
+        )
+    }
 
-    private val viewPodPersonalDataFormTwo by lazy { PersonalDataFormFillViewPod.newInstance(vpPersonalDataFormTwo) }
+    private val viewPodPersonalDataFormTwo by lazy {
+        PersonalDataFormFillViewPod.newInstance(
+            binding.vpPersonalDataFormTwo.root
+        )
+    }
 
-    private val viewPodPersonalDataFormThree by lazy { PersonalDataFormFillViewPod.newInstance(vpPersonalDataFormThree) }
+    private val viewPodPersonalDataFormThree by lazy {
+        PersonalDataFormFillViewPod.newInstance(
+            binding.vpPersonalDataFormThree.root
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_personal_data_form_fill, container, false)
+        binding = FragmentPersonalDataFormFillBinding.inflate(layoutInflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,17 +50,29 @@ class PersonalDataFormFillFragment : Fragment() {
     }
 
     private fun initUI() {
-        if(viewModel.validateInput()){
-            viewPodPersonalDataFormOne.bindData(viewModel.nameOne, viewModel.phoneOne , viewModel.addressOne)
-            viewPodPersonalDataFormTwo.bindData(viewModel.nameTwo, viewModel.phoneTwo , viewModel.addressTwo)
-            viewPodPersonalDataFormThree.bindData(viewModel.nameThree, viewModel.phoneThree , viewModel.addressThree)
+        if (viewModel.validateInput()) {
+            viewPodPersonalDataFormOne.bindData(
+                viewModel.nameOne,
+                viewModel.phoneOne,
+                viewModel.addressOne
+            )
+            viewPodPersonalDataFormTwo.bindData(
+                viewModel.nameTwo,
+                viewModel.phoneTwo,
+                viewModel.addressTwo
+            )
+            viewPodPersonalDataFormThree.bindData(
+                viewModel.nameThree,
+                viewModel.phoneThree,
+                viewModel.addressThree
+            )
         }
     }
 
     private fun initUIListener() {
-        btnOk.setOnClickListener {
+        binding.btnOk.setOnClickListener {
 
-            if(viewPodPersonalDataFormOne.validateInput() && viewPodPersonalDataFormTwo.validateInput() && viewPodPersonalDataFormThree.validateInput()){
+            if (viewPodPersonalDataFormOne.validateInput() && viewPodPersonalDataFormTwo.validateInput() && viewPodPersonalDataFormThree.validateInput()) {
 
                 viewModel.nameOne = viewPodPersonalDataFormOne.getName()!!
                 viewModel.phoneOne = viewPodPersonalDataFormOne.getPhone()!!
@@ -59,7 +86,7 @@ class PersonalDataFormFillFragment : Fragment() {
                 viewModel.phoneThree = viewPodPersonalDataFormThree.getPhone()!!
                 viewModel.addressThree = viewPodPersonalDataFormThree.getAddress()!!
 
-                viewModel.navigationController?.navigate(R.id.action_personal_data_form_fragment_to_personal_data_detail_fragment)
+                findNavController().navigate(R.id.action_personal_data_form_fragment_to_personal_data_detail_fragment)
             }
 
         }

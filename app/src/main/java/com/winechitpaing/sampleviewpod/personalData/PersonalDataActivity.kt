@@ -4,16 +4,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.Navigation
 import com.winechitpaing.sampleviewpod.R
+import com.winechitpaing.sampleviewpod.databinding.ActivityMainBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class PersonalDataActivity : AppCompatActivity() {
 
     private val viewModel by viewModel<PersonalDataViewModel>()
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        viewModel.navigationController = Navigation.findNavController(this, R.id.my_nav_host_fragment)
     }
 }

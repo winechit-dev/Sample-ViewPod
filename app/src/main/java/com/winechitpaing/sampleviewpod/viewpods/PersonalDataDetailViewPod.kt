@@ -2,16 +2,20 @@ package com.winechitpaing.sampleviewpod.viewpods
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.LinearLayout
 import androidx.cardview.widget.CardView
-import kotlinx.android.synthetic.main.viewpod_personal_data_detail.view.*
+import com.winechitpaing.sampleviewpod.databinding.ViewpodPersonalDataDetailBinding
 
 class PersonalDataDetailViewPod @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttrs: Int = 0
 ) : CardView(context, attrs, defStyleAttrs) {
+
+    private val binding by lazy {
+        ViewpodPersonalDataDetailBinding.bind(this)
+    }
 
     companion object {
 
@@ -23,8 +27,8 @@ class PersonalDataDetailViewPod @JvmOverloads constructor(
     }
 
     fun bindData(name: String, phone: String, address: String) {
-        tvName.text = name
-        tvPhone.text = phone
-        tvAddress.text = address
+        binding.tvName.text = name
+        binding.tvPhone.text = phone
+        binding.tvAddress.text = address
     }
 }
