@@ -5,7 +5,6 @@ import androidx.navigation.NavController
 
 class PersonalDataViewModel : ViewModel() {
 
-    var navigationController: NavController? = null
 
     var nameOne: String = ""
     var phoneOne: String = ""
